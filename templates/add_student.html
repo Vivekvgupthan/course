@@ -1,0 +1,77 @@
+{% extends 'nav.html' %}
+{% block content %}
+{% load static %} 
+<style>
+     body{
+        background-image: url("{% static 'images/sq1.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    
+    .container {
+        
+        max-width: 600px;
+        margin: 0 auto;
+        margin-top: 2%;
+        padding: 20px;
+        border-radius: 20px;
+        border: 2px solid rgba(6, 6, 6, 0.427);
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    h1 {
+        color: #e9f6e9;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    
+    label {
+        color: #000900;
+        font-weight: bold;
+        text-align: left;
+    }
+    
+    input, select, button {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 2px solid #0d0d0d;
+        outline: none;
+    }
+    
+    button {
+        width: auto;
+        padding: 10px 20px;
+        background-color: #000;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    }
+    
+    button:hover {
+        background-color: #0e8bf8;
+        border-color: #00070a;
+        color: white;
+    }
+</style>
+<div class="container">
+    <h1>Add Student</h1>
+    <form method="post" action="{% url 'add_student' %}">
+        {% csrf_token %}
+        <input type="text" placeholder="Enter name" name="name"><br>
+        <input type="text" placeholder="Enter Address" name="address"><br>
+        <input type="number" placeholder="Enter Age" name="age"><br>
+        <input type="date" name="join_date"><br>
+        <select id="course" name="course">
+            <option value="Select" selected>Select Course</option>
+            {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.Course }}</option>
+            {% endfor %}
+        </select><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
